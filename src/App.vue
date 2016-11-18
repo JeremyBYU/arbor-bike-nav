@@ -14,7 +14,6 @@
        <Timer :date="returnTime"></Timer>
        
       </md-toolbar>
-
     </md-sidenav>
     <div class="page-content single-page" style="height:100%">
       <md-whiteframe md-elevation="1" class="main-header">
