@@ -28,7 +28,7 @@ export default class LeafletVue extends Vue {
     // Create the Map
     this.map = L.map(this.mapDiv).setView([42.279594, -83.732124], 13)
     // Add the tile layer
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map)
