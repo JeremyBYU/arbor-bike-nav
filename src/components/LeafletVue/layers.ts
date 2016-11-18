@@ -56,8 +56,11 @@ export const bikeIcon = L.icon({
     iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
     shadowAnchor: [0, 0],  // the same for the shadow
     popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-});
-export const bikeLayerGroup = L.layerGroup(bikeStations.map((marker) => {
+})
+export const bikeLayerGroup: L.LayerGroup = L.layerGroup(bikeStations.map((marker) => {
   return L.marker(marker.latlong, { icon: bikeIcon} ).bindPopup(marker.text)
 }))
 
+export const layerGroups = {
+  bikes: bikeLayerGroup
+}

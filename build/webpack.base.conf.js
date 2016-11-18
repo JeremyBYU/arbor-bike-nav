@@ -20,7 +20,7 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue'],
+    extensions: ['', '.js', '.vue', '.ts'],
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
       'vue$': 'vue/dist/vue',
@@ -48,13 +48,13 @@ module.exports = {
       }
     ],
     loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      },
       { 
         test: /\.tsx?$/, 
         loader: 'vue-ts-loader'
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue'
       },
       {
         test: /\.html$/,
