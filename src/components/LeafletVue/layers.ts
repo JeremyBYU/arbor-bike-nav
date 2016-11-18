@@ -1,5 +1,12 @@
 import { markers, paths } from '../../types'
 import * as L from 'leaflet'
+
+declare var require: {
+    <T>(path: string): T;
+    (paths: string[], callback: (...modules: any[]) => void): void;
+    ensure: (paths: string[], callback: (require: <T>(path: string) => T) => void) => void;
+}
+
 export const bikeStations: markers[] = [
   {
     latlong: [42.28049559999999, -83.7485514],
@@ -134,7 +141,7 @@ export const parkList: paths[] = [
 ]
 
 export const bikeIcon = L.icon({
-    iconUrl: 'static/bicycle-icon.png',
+    iconUrl: require('../../assets/bicycle-icon.png') as string,//'static/bicycle-icon.png',
     shadowUrl: 'static/bicycle-icon.png',
 
     iconSize:     [32, 32], // size of the icon
@@ -145,7 +152,7 @@ export const bikeIcon = L.icon({
 })
 
 export const busIcon = L.icon({
-    iconUrl: 'static/busstop-icon.png',
+    iconUrl: require('../../assets/busstop-icon.png') as string,
     shadowUrl: 'static/busstop-icon.png',
 
     iconSize:     [32, 32], // size of the icon
@@ -156,7 +163,7 @@ export const busIcon = L.icon({
 })
 
 export const restrauntsIcon = L.icon({
-    iconUrl: 'static/restaurant-icon.png',
+    iconUrl: require('../../assets/restaurant-icon.png') as string,
     shadowUrl: 'static/restaurant-icon.png',
 
     iconSize:     [32, 32], // size of the icon

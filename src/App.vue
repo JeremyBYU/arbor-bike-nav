@@ -3,7 +3,7 @@
     <md-sidenav class="main-sidebar md-left md-fixed" ref="main-sidebar">
       <md-toolbar class="vue-material-logo" v-md-theme="'white'">
         <a href="">
-          <img src="/static/arborbike_logo.png" alt="Arbor Bike">
+          <img src="./assets/arborbike_logo.png" alt="Arbor Bike">
         </a>
       </md-toolbar>
 
