@@ -5,6 +5,11 @@ declare var require: {
 };
 
 export interface markers {
-    latlong: [number, number];
-    text: string;
+    latlong: [number, number]
+    text: string
+}
+
+export interface paths {
+    latlong: [[number, number]]
+    text: string
 }

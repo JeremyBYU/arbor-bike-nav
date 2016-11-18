@@ -60,7 +60,7 @@ export default {
 
 <style lang="scss">
   @import '../node_modules/vue-material/src/core/stylesheets/variables.scss';
-  $sizebar-size: 280px;
+  $sizebar-size: 200px;
   html,
   body {
     height: 100%;
@@ -76,7 +76,7 @@ export default {
     flex-flow: column nowrap;
     flex: 1;
     transition: $swift-ease-out;
-    @media (min-width: 1280px) {
+    @media (min-width: 960px) {
       padding-left: $sizebar-size;
     }
   }
@@ -85,7 +85,7 @@ export default {
     position: relative;
     z-index: 3;
     .md-button:first-child {
-      @media (min-width: 1280px) {
+      @media (min-width: 960px) {
         display: none;
       }
     }
@@ -96,12 +96,12 @@ export default {
     .md-title {
       .page-title {
         margin-left: 0;
-        @media (min-width: 1280px) {
+        @media (min-width: 960px) {
           margin-left: 8px;
         }
       }
       span:not(.page-title) {
-        @media (min-width: 1280px) {
+        @media (min-width: 960px) {
           display: none;
         }
       }
@@ -113,7 +113,7 @@ export default {
       width: $sizebar-size;
       display: flex;
       flex-flow: column;
-      @media (min-width: 1280px) {
+      @media (min-width: 960px) {
         top: 0;
         pointer-events: auto;
         transform: translate3d(0, 0, 0);
@@ -121,7 +121,7 @@ export default {
       }
     }
     .md-backdrop {
-      @media (min-width: 1280px) {
+      @media (min-width: 960px) {
         opacity: 0;
         pointer-events: none;
       }
@@ -186,8 +186,8 @@ export default {
     right: 0;
     left: 0;
     transition: $swift-ease-out;
-    @media (min-width: 1280px) {
-      left: 280px;
+    @media (min-width: 960px) {
+      left: 200px;
     }
   }
   

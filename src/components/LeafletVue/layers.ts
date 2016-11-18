@@ -1,4 +1,4 @@
-import { markers } from '../../types'
+import { markers, paths } from '../../types'
 import * as L from 'leaflet'
 export const bikeStations: markers[] = [
   {
@@ -47,6 +47,43 @@ export const bikeStations: markers[] = [
   }
 ]
 
+
+export const restaurants: markers[] = [
+  {
+    latlong: [42.298631, -83.721544],
+    text: 'Cardamon'
+  },
+  {
+    latlong: [42.2877475,-83.7431325],
+    text: 'Gandys Dancer'
+  },
+  {
+    latlong: [42.2818116, -83.745684],
+    text: 'City Hall/Justice Center'
+  },
+  {
+    latlong: [42.2717882, -83.7466174],
+    text: 'S. Division & Hill'
+  },
+  {
+    latlong: [42.2786013, -83.7483742],
+    text: 'Library Lane'
+  }
+]
+
+
+export const bikePaths: paths[] = [
+  {
+    latlong: [
+     [42.287150, -83.720129], [42.286729, -83.720236], [42.285665, -83.720290],
+     [42.284544, -83.719877], [42.284480, -83.718375], [42.283916, -83.717721], [42.283739, -83.716575],
+     [42.283414, -83.715760], [42.281866, -83.712520], [42.278945, -83.709424], [42.277017, -83.705952],
+     [42.275810, -83.703688], [42.275627, -83.702443]
+    ],
+    text: 'River Path'
+  }
+]
+
 export const bikeIcon = L.icon({
     iconUrl: 'static/bicycle-icon.png',
     shadowUrl: 'static/bicycle-icon.png',
@@ -57,10 +94,21 @@ export const bikeIcon = L.icon({
     shadowAnchor: [0, 0],  // the same for the shadow
     popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 })
-export const bikeLayerGroup: L.LayerGroup = L.layerGroup(bikeStations.map((marker) => {
+
+const bikeLayerGroup: L.LayerGroup = L.layerGroup(bikeStations.map((marker) => {
   return L.marker(marker.latlong, { icon: bikeIcon} ).bindPopup(marker.text)
 }))
 
+const pathLayerGroup: L.LayerGroup = L.layerGroup(bikePaths.map((path) => {
+  return L.polyline(path.latlong, {
+    color: 'blue',
+    weight: 5,
+    opacity: .5,
+    smoothFactor: 1
+  })
+}))
+
 export const layerGroups = {
-  bikes: bikeLayerGroup
+  bikes: bikeLayerGroup,
+  bikepaths: pathLayerGroup
 }

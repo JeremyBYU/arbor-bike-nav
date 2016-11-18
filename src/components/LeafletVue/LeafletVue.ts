@@ -42,6 +42,7 @@ export default class LeafletVue extends Vue {
     this.mapDiv.style.height = String(height) + 'px'
   }
   toggleFilters (obj) {
+    //debugger
     for (let prop in obj) {
       const layer: L.LayerGroup = layerGroups[prop]
       if (layer === undefined) {
