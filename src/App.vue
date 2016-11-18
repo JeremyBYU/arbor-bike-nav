@@ -9,7 +9,10 @@
 
       <md-toolbar class="vue-material-logo" v-md-theme="'white'">
         <filters></filters>
-
+      </md-toolbar>
+      <md-toolbar style="margin-top:30px; height: 100%">
+       <Timer :date="returnTime"></Timer>
+       
       </md-toolbar>
 
     </md-sidenav>
@@ -28,6 +31,7 @@
       </md-whiteframe>
       <div class="single-page-content" style="height:100%">
         <leaflet-vue></leaflet-vue>
+
       </div>
     </div>
   </div>
@@ -38,17 +42,20 @@
 <script>
 import LeafletVue from './components/LeafletVue/LeafletVue.ts'
 import Filters from './components/filters/filters.ts'
+import Timer from './components/Timer'
 
 export default {
   name: 'app',
   data: () => {
     return {
-      toolbar: true
+      toolbar: true,
+      returnTime: Math.trunc((Date.now() + 3.6e+6) / 1000)
     }
   },
   components: {
     LeafletVue,
-    Filters
+    Filters,
+    Timer
   },
   methods: {
     toggleSidenav () {
