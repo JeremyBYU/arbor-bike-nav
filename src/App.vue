@@ -78,6 +78,7 @@ export default {
   
   .container {
     min-height: 100%;
+    height: 100%;
     display: flex;
     flex-flow: column nowrap;
     flex: 1;
