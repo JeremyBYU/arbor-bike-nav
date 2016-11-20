@@ -39,7 +39,7 @@ export default class LeafletVue extends Vue {
   }
   resize () {
     let height = this.$el.clientHeight
-    this.mapDiv.style.height = String(height) + 'px'
+    this.mapDiv.style.height = String(height - 64) + 'px'
   }
   toggleFilters (obj) {
     //debugger
