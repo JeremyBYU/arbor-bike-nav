@@ -208,6 +208,30 @@ export default {
       transform: translate3D(0, -36px, 0);
     }
   }
+  .single-page-content {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .single-page {
+    padding-top: 64px;
+    .main-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 2;
+      transition: $swift-ease-out;
+      @media (min-width: 960px) {
+        padding-left: 200px;
+      }
+      .md-toolbar,
+      .md-title {
+        color: #fff;
+      }
+    }
+  }
   
   code {
     &:not(.hljs) {
