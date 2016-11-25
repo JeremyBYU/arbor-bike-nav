@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="block">
-      <p class="digit">{{minutes }}</p>
-      <p class="text">Minutes Remaining</p>
+      <p class="digit" :class="{'black-text': minutes < 30 && minutes > 15}">{{minutes }}:{{seconds}}</p>
+      <p v-on:click="fastForward" class="text" :class="{'black-text': minutes < 30 && minutes > 15}">Minutes Remaining</p>
     </div>
   </div>
 </template>
@@ -14,13 +14,14 @@ export default {
     }, 1000)
   },
   props: {
-    date: {
-      type: Number
+    changecolor: {
+      type: Function
     }
   },
   data () {
     return {
-      now: Math.trunc((new Date()).getTime() / 1000)
+      now: Math.trunc((new Date()).getTime() / 1000),
+      date: Math.trunc((Date.now() + 3.6e+6) / 1000)
     }
   },
   methods: {
@@ -29,20 +30,41 @@ export default {
         return '0' + value.toString()
       }
       return value.toString()
+    },
+    fastForward () {
+      const S_PER_MINUTE = 60
+      // Reset the date back to 60 minutes in the future if its back to 0.
+      if (this.date - this.now < 0) {
+        this.date = Math.trunc((Date.now() + 3.6e+6) / 1000)
+      } else {
+        this.date = this.date - 15 * S_PER_MINUTE
+      }
     }
   },
   computed: {
     seconds () {
-      return this.two_digits((this.date - this.now) % 60)
+      return this.two_digits(Math.max((this.date - this.now) % 60, 0))
     },
     minutes () {
-      return this.two_digits(Math.trunc((this.date - this.now) / 60) % 60)
+      return this.two_digits(Math.max(Math.trunc((this.date - this.now) / 60) % 60, 0))
     },
     hours () {
       return Math.trunc((this.date - this.now) / 60 / 60) % 24
     },
     days () {
       return Math.trunc((this.date - this.now) / 60 / 60 / 24)
+    }
+  },
+  watch: {
+    // whenever minutes changes, this function will run
+    minutes: function (minutes) {
+      if (this.minutes < 15) {
+        this.changecolor(2)
+      } else if (this.minutes < 30) {
+        this.changecolor(1)
+      } else {
+        this.changecolor(0)
+      }
     }
   }
 }
@@ -56,7 +78,7 @@ export default {
   }
 
   .text {
-    color: #1abc9c;
+    color: #ecf0f1;
     font-size: 22px;
     font-family: 'Roboto Condensed', serif;
     font-weight: 400;
@@ -72,5 +94,8 @@ export default {
     font-family: 'Roboto', serif;
     margin: 10px;
     text-align: center;
+  }
+  .black-text {
+    color: #000000;
   }
 </style>

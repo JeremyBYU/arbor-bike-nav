@@ -10,8 +10,8 @@
       <md-toolbar class="vue-material-logo" v-md-theme="'white'">
         <filters></filters>
       </md-toolbar>
-      <md-toolbar style="margin-top:30px; height: 100%">
-       <Timer :date="returnTime"></Timer>
+      <md-toolbar style="margin-top:30px; height: 100%" :class="colorToolbar">
+       <Timer :changecolor="changeColor"></Timer>
        
       </md-toolbar>
     </md-sidenav>
@@ -48,7 +48,8 @@ export default {
   data: () => {
     return {
       toolbar: true,
-      returnTime: Math.trunc((Date.now() + 3.6e+6) / 1000)
+      returnTime: Math.trunc((Date.now() + 3.6e+6) / 1000),
+      color: 0
     }
   },
   components: {
@@ -59,6 +60,19 @@ export default {
   methods: {
     toggleSidenav () {
       this.$refs['main-sidebar'].toggle()
+    },
+    changeColor (color) {
+      // console.log(color)
+      this.color = color
+    }
+  },
+  computed: {
+    colorToolbar: function () {
+      return {
+        regular: this.color === 0,
+        warning: this.color === 1,
+        danger: this.color === 2
+      }
     }
   }
 }
@@ -74,6 +88,15 @@ export default {
   
   body {
     display: flex;
+  }
+  .danger {
+    background-color: #F01C00 !important;
+  }
+  .warning {
+    background-color: #F2EF1D !important;
+  }
+  .regular {
+    background-color: #3f51b5 !important;
   }
   
   .container {
