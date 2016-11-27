@@ -7,6 +7,7 @@
   </div>
 </template>
 <script>
+import { beep1, beep2, beep3 } from './sounds'
 export default {
   mounted () {
     window.setInterval(() => {
@@ -21,7 +22,8 @@ export default {
   data () {
     return {
       now: Math.trunc((new Date()).getTime() / 1000),
-      date: Math.trunc((Date.now() + 3.6e+6) / 1000)
+      date: Math.trunc((Date.now() + 3.6e+6) / 1000),
+      beepsDone: 0
     }
   },
   methods: {
@@ -37,7 +39,16 @@ export default {
       if (this.date - this.now < 0) {
         this.date = Math.trunc((Date.now() + 3.6e+6) / 1000)
       } else {
-        this.date = this.date - 15 * S_PER_MINUTE
+        this.date = this.date - 10 * S_PER_MINUTE
+      }
+    },
+    beepN (num) {
+      if (num === 1) {
+        beep1.play()
+      } else if (num === 2) {
+        beep2.play()
+      } else {
+        beep3.play()
       }
     }
   },
@@ -58,12 +69,26 @@ export default {
   watch: {
     // whenever minutes changes, this function will run
     minutes: function (minutes) {
-      if (this.minutes < 15) {
+      if (this.minutes < 5) {
+        if (this.beepsDone < 4) {
+          this.beepN(3)
+          this.beepsDone += 3
+        }
+      } else if (this.minutes < 10) {
         this.changecolor(2)
+        if (this.beepsDone < 2) {
+          this.beepN(2)
+          this.beepsDone += 2
+        }
       } else if (this.minutes < 30) {
         this.changecolor(1)
+        if (this.beepsDone < 1) {
+          this.beepN(1)
+          this.beepsDone += 1
+        }
       } else {
         this.changecolor(0)
+        this.beepsDone = 0
       }
     }
   }
@@ -79,17 +104,18 @@ export default {
 
   .text {
     color: #ecf0f1;
-    font-size: 22px;
+    font-size: 28px;
     font-family: 'Roboto Condensed', serif;
     font-weight: 400;
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
+    line-height: 32px;
   }
 
   .digit {
     color: #ecf0f1;
-    font-size: 20px;
+    font-size: 32px;
     font-weight: 20;
     font-family: 'Roboto', serif;
     margin: 10px;
