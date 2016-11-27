@@ -16,10 +16,10 @@ const template: string = require('./filters.html') as string
 })
 export default class Filters extends Vue {
   bikes: boolean = true
-  bikepaths: boolean = false
-  restaurants: boolean = false
-  parks: boolean = false
-  busstops: boolean = false
+  bikepaths: boolean = true
+  restaurants: boolean = true
+  parks: boolean = true
+  busstops: boolean = true
 
   mounted () {
     this.sendMessage()

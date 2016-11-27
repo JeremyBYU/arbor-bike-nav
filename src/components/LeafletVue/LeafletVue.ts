@@ -36,9 +36,9 @@ export default class LeafletVue extends Vue {
     // add resize event listeners
     window.addEventListener('resize', this.resize)
     bus.$on('filter-update', this.toggleFilters)
-    this.toggleFilters( { bikes: true})
+    this.toggleFilters( { bikes: true, bikepaths: true, restaurants: true, parks: true, busstops: true })
     this.map.on('locationfound', this.onLocationFound)
-    this.map.on('locationerror', this.onLocationError);
+    this.map.on('locationerror', this.onLocationError)
   }
   resize () {
     let height = this.$el.clientHeight
@@ -46,7 +46,6 @@ export default class LeafletVue extends Vue {
   }
   onLocationFound (e) {
     const radius = e.accuracy / 2
-    //alert(e.latlng)
     if (radius < 1000) {
       L.marker(e.latlng, { icon: geoIcon }).addTo(this.map).bindPopup('My location').openPopup()
       // L.circle(e.latlng, radius).addTo(this.map)
