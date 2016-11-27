@@ -3,7 +3,7 @@ import './LeafletVue.css'
 // import {require } '../../types.ts'  // Require Signature for Typescript
 import { Component } from 'vue-property-decorator'
 import { bus } from '../../state/state'
-import { layerGroups } from './layers'
+import { layerGroups, geoIcon } from './layers'
 import * as L from 'leaflet'
 
 declare var require: {
@@ -27,6 +27,7 @@ export default class LeafletVue extends Vue {
     this.resize()
     // Create the Map
     this.map = L.map(this.mapDiv).setView([42.279594, -83.732124], 13)
+    this.map.locate({setView: true, maxZoom: 15})
     // Add the tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -36,10 +37,28 @@ export default class LeafletVue extends Vue {
     window.addEventListener('resize', this.resize)
     bus.$on('filter-update', this.toggleFilters)
     this.toggleFilters( { bikes: true})
+    this.map.on('locationfound', this.onLocationFound)
+    this.map.on('locationerror', this.onLocationError);
   }
   resize () {
     let height = this.$el.clientHeight
     this.mapDiv.style.height = String(height) + 'px'
+  }
+  onLocationFound (e) {
+    const radius = e.accuracy / 2
+    //alert(e.latlng)
+    if (radius < 1000) {
+      L.marker(e.latlng, { icon: geoIcon }).addTo(this.map).bindPopup('My location').openPopup()
+      // L.circle(e.latlng, radius).addTo(this.map)
+    } else {
+      this.map.setView([42.279594, -83.732124], 13)
+    }
+
+
+  }
+  onLocationError (e) {
+    alert('Couldnt get your location. Centering on Ann Arbor')
+    this.map.setView([42.279594, -83.732124], 13)
   }
   toggleFilters (obj) {
     //debugger

@@ -162,6 +162,17 @@ export const busIcon = L.icon({
     popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 })
 
+export const geoIcon = L.icon({
+    iconUrl: require('../../assets/geo-marker.png') as string,
+    shadowUrl: 'static/geo-marker.png',
+
+    iconSize:     [32, 32], // size of the icon
+    shadowSize:   [0, 0], // size of the shadow
+    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 0],  // the same for the shadow
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+})
+
 export const restrauntsIcon = L.icon({
     iconUrl: require('../../assets/restaurant-icon.png') as string,
     shadowUrl: 'static/restaurant-icon.png',
